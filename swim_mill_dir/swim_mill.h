@@ -1,5 +1,5 @@
-#ifndef COORDINATOR_H_
-# define COORDINATOR_H_
+#ifndef SWIM_MILL_H_
+# define SWIM_MILL_H_
 
 # include "../common/utils.h"
 
@@ -8,4 +8,4 @@
 void game_loop(key_t k);
 void delete_shm_sem();
 
-#endif /* !COORDINATOR_H_ */
+#endif /* !SWIM_MILL_H_ */

@@ -1,6 +1,6 @@
 #include <strings.h>
 #include <stdio.h>
-#include "coordinator.h"
+#include "swim_mill.h"
 
 void setup_shm(key_t k, int *shm_id)
 {

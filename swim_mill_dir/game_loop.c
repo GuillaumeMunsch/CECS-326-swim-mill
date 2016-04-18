@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <strings.h>
 #include <signal.h>
-#include "coordinator.h"
+#include "swim_mill.h"
 
 void sigint_handler(int sig)
 {

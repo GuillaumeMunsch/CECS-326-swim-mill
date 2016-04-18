@@ -2,18 +2,24 @@
 
 NAME	= CECS-326
 
-all:
-	make -C fish_dir/
-	make -C pellet_dir/
-	make -C coordinator_dir/
+SWIM_MILL_DIR = swim_mill_dir/
+FISH_DIR = fish_dir/
+PELLET_DIR = pellet_dir/
+
+all: $(NAME)
+
+$(NAME):
+	make -C $(FISH_DIR)
+	make -C $(PELLET_DIR)
+	make -C $(SWIM_MILL_DIR)
 clean:
-	make clean -C fish_dir/
-	make clean -C pellet_dir/
-	make clean -C coordinator_dir/
+	make clean -C $(FISH_DIR)
+	make clean -C $(PELLET_DIR)
+	make clean -C $(SWIM_MILL_DIR)
 
 fclean: clean
-	make fclean -C fish_dir/
-	make fclean -C pellet_dir/
-	make fclean -C coordinator_dir/
+	make fclean -C $(FISH_DIR)
+	make fclean -C $(PELLET_DIR)
+	make fclean -C $(SWIM_MILL_DIR)
 
 re: fclean all
