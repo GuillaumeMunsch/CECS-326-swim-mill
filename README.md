@@ -22,7 +22,7 @@ $ make
 And launch it this way:
 
 ```sh
-$ ./coordinator
+$ ./swim_mill
 ```
 
    [C]: <http://www.cprogramming.com>
