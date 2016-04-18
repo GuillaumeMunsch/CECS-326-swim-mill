@@ -48,7 +48,6 @@ void lock_map(int map_lock)
   op.sem_op = -1;
   if (semop(map_lock, &op, 1) == -1)
     my_exit("Fail on locking map");
-  puts("Map locked");
 }
 
 void unlock_map(int map_lock)
@@ -60,7 +59,6 @@ void unlock_map(int map_lock)
   op.sem_op = 1;
   if (semop(map_lock, &op, 1) == -1)
     my_exit("Fail on unlocking map");
-  puts("Map unlocked");
 }
 
 void print_map(char *river, int map_lock)
@@ -82,4 +80,5 @@ void print_map(char *river, int map_lock)
       write(1, "\n", 1);
   }
   unlock_map(map_lock);
+  write(1, "\n", 12);
 }

@@ -50,7 +50,6 @@ void move_fish(char *river, int *pos, char *fish_line)
   if (!(pellet_line = find_pellet_line(river)))
     return;
   closest_pellet_pos = get_closest_pellet_pos(*pos, pellet_line);
-  printf("Fish: [%d] - Pellet: [%d]\n", *pos, closest_pellet_pos);
   if (closest_pellet_pos == *pos)
     return;
   UNSETFISHBIT(fish_line[*pos]);

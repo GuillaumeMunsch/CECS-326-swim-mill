@@ -5,32 +5,30 @@
 #include <signal.h>
 #include "coordinator.h"
 
-void pellet_worker(pid_t pellet_pid[5])
+void sigint_handler(int sig)
 {
-  int i = 0;
+  signal(SIGQUIT, SIG_IGN);
+  kill(-((int)getpid()), SIGQUIT);
+  delete_shm_sem();
+  my_exit("Recieved SIGINT");
+}
 
-  while (pellet_pid[i++] != 0);
-  if (i == 5)
-    return;
-  if ((pellet_pid[i] = fork()) == -1)
+void pellet_worker()
+{
+  pid_t pid;
+
+  if ((pid = fork()) == -1)
     fprintf(stderr, "Fail on creating pellet\n");
-  else if (!pellet_pid[i])
-  {
+  else if (!pid)
     if (execlp("./pellet", "pellet", NULL) == -1)
       my_exit("Fail on launching pellet");
-  }
-  else
-  {
-
-  }
 }
 
 void game_loop(key_t k)
 {
   int begin, curr_time = 0, i;
-  pid_t pellet_pid[5], fish_pid;
+  pid_t fish_pid;
 
-  bzero(pellet_pid, 5 * sizeof(*pellet_pid));
   if ((fish_pid = fork()) == -1)
     my_exit("Failure on fork");
   else if (!fish_pid)
@@ -40,20 +38,17 @@ void game_loop(key_t k)
   }
   else
   {
-    usleep(500000);
+    signal(SIGINT, sigint_handler);
     if ((begin = time(NULL)) == (time_t)-1)
       my_exit("Fail on time");
     while (curr_time < 30)
     {
       curr_time = time(NULL) - begin;
       usleep(COORDINATOR_CYCLE);
-      pellet_worker(pellet_pid);
+      pellet_worker();
     }
-    if (kill(fish_pid, SIGKILL) == -1)
-      fprintf(stderr, "Failed to kill fish\n");
-    for (i = 0; i < 5; ++i)
-      if (pellet_pid[i] != 0)
-        if (kill(pellet_pid[i], SIGKILL) == -1)
-          fprintf(stderr, "Failed to kill pellet n°%d\n", i);
+    signal(SIGQUIT, SIG_IGN);
+    kill(-((int)getpid()), SIGQUIT);
+    delete_shm_sem();
   }
 }

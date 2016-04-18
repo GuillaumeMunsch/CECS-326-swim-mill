@@ -25,6 +25,24 @@ void setup_sem(key_t k, int *sem_id)
     my_exit("Fail to set map_lock");
 }
 
+void delete_shm_sem()
+{
+  key_t k;
+  int shm_id, sem_id;
+
+  k = get_key();
+  if ((shm_id = shmget(k, RIVER_HEIGHT * RIVER_WIDTH, SHM_R | SHM_W)) == -1)
+    fprintf(stderr, "Fail on getting shm\n");
+  if ((sem_id = semget(k, 1, SHM_R | SHM_W)) == -1)
+    fprintf(stderr, "Fail on getting sem\n");
+  printf("Removing shm\n");
+    if (shmctl(shm_id, IPC_RMID, NULL) == -1)
+    fprintf(stderr, "Fail on removing shm\n");
+  printf("Removing sem\n");
+  if (semctl(sem_id, 0, IPC_RMID) == -1)
+    fprintf(stderr, "Fail on removing sem\n");
+}
+
 int main(int ac, char **av)
 {
   key_t k;
@@ -36,9 +54,5 @@ int main(int ac, char **av)
   setup_shm(k, &shm_id);
   setup_sem(k, &sem_id);
   game_loop(k);
-  if (shmctl(shm_id, IPC_RMID, NULL) == -1)
-    fprintf(stderr, "Fail on removing shm\n");
-  if (semctl(sem_id, 0, IPC_RMID) == -1)
-    fprintf(stderr, "Fail on removing sem\n");
   return (0);
 }
