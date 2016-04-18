@@ -5,6 +5,7 @@ CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -ansi
 CFLAGS += -pedantic
+CFLAGS += -Wno-unused-parameter
 
 SRC		= main.c \
 		../common/utils.c

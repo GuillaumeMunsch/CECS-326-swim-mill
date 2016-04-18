@@ -16,8 +16,6 @@ void setup_shm(key_t k, int *shm_id)
 
 void setup_sem(key_t k, int *sem_id)
 {
-  union semun op;
-
   if ((*sem_id = semget(k, 1, SHM_R | SHM_W)) == -1)
     if ((*sem_id = semget(k, 1, IPC_CREAT | SHM_R | SHM_W)) == -1)
       my_exit("Fail on creating sem");

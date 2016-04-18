@@ -51,11 +51,9 @@ int main(int ac, char **av)
   key_t k;
   char *river;
 
-  puts("Pellet creation");
   k = get_key();
   map_lock = get_map_lock(k);
   river = get_river(k);
   exec_pellet(map_lock, river);
-  puts("Pellet deletion");
   return (0);
 }

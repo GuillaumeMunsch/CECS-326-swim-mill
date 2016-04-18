@@ -64,7 +64,6 @@ void exec_fish(int map_lock, char *river)
 
   pos = RIVER_WIDTH / 2;
   lock_map(map_lock);
-  puts("Putting fish into the river");
   SETFISHBIT(fish_line[pos]);
   unlock_map(map_lock);
   while (1)
@@ -83,7 +82,6 @@ int main()
   int map_lock;
   char *river;
 
-  puts("Fish creation\n");
   k = get_key();
   map_lock = get_map_lock(k);
   river = get_river(k);

@@ -26,7 +26,7 @@ void pellet_worker()
 
 void game_loop(key_t k)
 {
-  int begin, curr_time = 0, i;
+  int begin, curr_time = 0;
   pid_t fish_pid;
 
   if ((fish_pid = fork()) == -1)
@@ -47,6 +47,7 @@ void game_loop(key_t k)
       usleep(COORDINATOR_CYCLE);
       pellet_worker();
     }
+    printf("End of the game\n");
     signal(SIGQUIT, SIG_IGN);
     kill(-((int)getpid()), SIGQUIT);
     delete_shm_sem();
