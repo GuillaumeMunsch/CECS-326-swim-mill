@@ -5,20 +5,19 @@ CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -ansi
 CFLAGS += -pedantic
-CFLAGS += -Wno-unused-parameter
+CFLAGS += -g
 
-NAME		= swim_mill
+LDFLAGS += -lncurses
 
 SRC		= main.c \
-		../common/utils.c \
-		game_loop.c
+		../common/utils.c
 
 OBJ		= $(SRC:.c=.o)
 
-NAME	= coordinator
+NAME	= graphic
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ)
+	gcc -o $(NAME) $(LDFLAGS) $(OBJ)
 	mv $(NAME) ..
 
 all: $(NAME)

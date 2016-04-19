@@ -17,6 +17,7 @@ void pellet_worker()
 {
   pid_t pid;
 
+  //Random à implémenter
   if ((pid = fork()) == -1)
     fprintf(stderr, "Fail on creating pellet\n");
   else if (!pid)
