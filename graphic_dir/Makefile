@@ -5,7 +5,7 @@ CFLAGS += -Wall
 CFLAGS += -Wextra
 CFLAGS += -ansi
 CFLAGS += -pedantic
-CFLAGS += -g
+CFLAGS += -Wno-unused-parameter
 
 LDFLAGS += -lncurses
 

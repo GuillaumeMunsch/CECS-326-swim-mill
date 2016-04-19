@@ -80,5 +80,5 @@ void print_map(char *river, int map_lock)
       write(1, "\n", 1);
   }
   unlock_map(map_lock);
-  write(1, "\n", 12);
+  write(1, "\n", 1);
 }

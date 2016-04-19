@@ -11,7 +11,7 @@
 
 # define FISH_CYCLE 500000 /* In microseconds */
 # define PELLET_CYCLE 3500000 /* In microseconds */
-# define COORDINATOR_CYCLE 2500000 /* In microseconds */
+# define COORDINATOR_CYCLE 500000 /* In microseconds */
 
 # define GETBIT(c, bit_number) ((c >> bit_number) & 1)
 # define SETBIT(c, bit_number, val) (c ^= (-val ^ c) & (1 << bit_number))

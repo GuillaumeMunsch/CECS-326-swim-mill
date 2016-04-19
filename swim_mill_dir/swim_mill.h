@@ -5,7 +5,7 @@
 
 # define GAME_TIME 30
 
-void game_loop(key_t k);
+void game_loop(key_t k, char *river, int map_lock, int ui);
 void delete_shm_sem();
 
 #endif /* !SWIM_MILL_H_ */

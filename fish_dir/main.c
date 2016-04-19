@@ -68,7 +68,6 @@ void exec_fish(int map_lock, char *river)
   unlock_map(map_lock);
   while (1)
   {
-    print_map(river, map_lock);
     usleep(FISH_CYCLE);
     lock_map(map_lock);
     move_fish(river, &pos, fish_line);

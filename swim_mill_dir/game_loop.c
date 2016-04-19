@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <strings.h>
 #include <signal.h>
+#include <stdlib.h>
 #include "swim_mill.h"
 
 void sigint_handler(int sig)
@@ -17,7 +18,6 @@ void pellet_worker()
 {
   pid_t pid;
 
-  //Random à implémenter
   if ((pid = fork()) == -1)
     fprintf(stderr, "Fail on creating pellet\n");
   else if (!pid)
@@ -25,11 +25,12 @@ void pellet_worker()
       my_exit("Fail on launching pellet");
 }
 
-void game_loop(key_t k)
+void game_loop(key_t k, char *river, int map_lock, int ui)
 {
   int begin, curr_time = 0;
   pid_t fish_pid;
 
+  srand(time(NULL));
   if ((fish_pid = fork()) == -1)
     my_exit("Failure on fork");
   else if (!fish_pid)
@@ -46,7 +47,10 @@ void game_loop(key_t k)
     {
       curr_time = time(NULL) - begin;
       usleep(COORDINATOR_CYCLE);
-      pellet_worker();
+      if (!(rand() % 5))
+        pellet_worker();
+      if (!ui)
+        print_map(river, map_lock);
     }
     printf("End of the game\n");
     signal(SIGQUIT, SIG_IGN);
