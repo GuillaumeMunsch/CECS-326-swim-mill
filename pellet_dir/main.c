@@ -26,8 +26,8 @@ void exec_pellet(int map_lock, char *river)
   srand(time(NULL));
   while (!alive)
   {
-    lock_map(map_lock);
     pos = rand() % ((RIVER_HEIGHT - 2) * RIVER_WIDTH);
+    lock_map(map_lock);
     if (!ISPELLETBIT(river[pos]))
     {
       SETPELLETBIT(river[pos]);
@@ -37,12 +37,22 @@ void exec_pellet(int map_lock, char *river)
   }
   while (alive)
   {
+    lock_map(map_lock);
+    if (ISFISHBIT(river[pos]))
+    {
+      UNSETPELLETBIT(river[pos]);
+      unlock_map(map_lock);
+      break;
+    }
+    unlock_map(map_lock);
     usleep(PELLET_CYCLE);
     lock_map(map_lock);
     move_pellet(&pos, &alive, river);
     unlock_map(map_lock);
   }
+  lock_map(map_lock);
   UNSETPELLETBIT(river[pos]);
+  unlock_map(map_lock);
 }
 
 int main(int ac, char **av)
