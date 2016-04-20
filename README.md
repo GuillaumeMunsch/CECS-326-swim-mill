@@ -31,7 +31,7 @@ $ ./swim_mill
 ```
 
 This will look like that:
-{% include image.html url="/screenshots/no_lib.png" description="Without lib" %}
+![](screenshots/no_lib.png?raw=true)
 
 ### Graphic part
 
