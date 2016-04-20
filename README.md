@@ -31,6 +31,7 @@ $ ./swim_mill
 ```
 
 This will look like that:
+
 ![](screenshots/no_lib.png?raw=true)
 
 ### Graphic part
@@ -43,11 +44,21 @@ The graphical part has been developped with the `ncurses` library which can be i
 $ brew install ncurses
 ```
 
-Once you've done this, run it this way:
+Once you've done this, compile the graphic part:
+
+```sh
+$ make graphic
+```
+
+And simply run it this way:
 
 ```sh
 $ ./swim_mill graphic
 ```
+
+It looks a bit prettier with the ncurses library:
+
+![](screenshots/ncurses.png?raw=true)
 
 Made with ♥ by Guillaume Munsch
 
