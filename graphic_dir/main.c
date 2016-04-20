@@ -1,3 +1,4 @@
+#include <curses.h>
 #include <ncurses.h>
 #include <strings.h>
 #include <unistd.h>
@@ -27,11 +28,13 @@ void print_arround()
       map[i * (RIVER_WIDTH + 2) + RIVER_WIDTH + 1] = '#';
     }
   }
+  attron(COLOR_PAIR(BLUE));
   for (i = 0; i < RIVER_HEIGHT + 2; ++i)
   {
       strncpy(line, &(map[i * (RIVER_WIDTH + 2)]), (RIVER_WIDTH + 2) * sizeof(*line));
       mvprintw(i, 0, line);
   }
+  attroff(COLOR_PAIR(BLUE));
 }
 
 void print_body(int map_lock, char *river)
@@ -46,11 +49,15 @@ void print_body(int map_lock, char *river)
         continue ;
       else if (ISFISHBIT(river[i * RIVER_WIDTH + j]))
       {
+        attron(COLOR_PAIR(RED));
         mvprintw(i + 1, j + 1, "F");
+        attroff(COLOR_PAIR(RED));
       }
       else
       {
-        mvprintw(i + 1, j + 1, "*");
+        attron(COLOR_PAIR(GREEN));
+        mvprintw(i + 1, j + 1, "o");
+        attroff(COLOR_PAIR(GREEN));
       }
     }
   unlock_map(map_lock);
@@ -59,7 +66,8 @@ void print_body(int map_lock, char *river)
 void sigquit_handler(int signal)
 {
   endwin();
-  my_exit("Exiting UI");
+  fprintf(stderr, "Exiting UI\n");
+  exit(1);
 }
 
 int main(int ac, char **av)
@@ -72,6 +80,10 @@ int main(int ac, char **av)
   map_lock = get_map_lock(k);
   river = get_river(k);
   initscr();
+  start_color();
+  init_pair(1, COLOR_CYAN, COLOR_BLUE);
+  init_pair(2, COLOR_RED, COLOR_BLUE);
+  init_pair(3, COLOR_GREEN, COLOR_BLUE);
   signal(SIGQUIT, sigquit_handler);
   signal(SIGQUIT, sigquit_handler);
   noecho();

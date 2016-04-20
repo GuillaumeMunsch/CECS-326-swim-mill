@@ -52,9 +52,9 @@ void game_loop(key_t k, char *river, int map_lock, int ui)
       if (!ui)
         print_map(river, map_lock);
     }
-    printf("End of the game\n");
     signal(SIGQUIT, SIG_IGN);
     kill(-((int)getpid()), SIGQUIT);
+    printf("End of the game\n");
     delete_shm_sem();
   }
 }
