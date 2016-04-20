@@ -60,7 +60,7 @@ It looks a bit prettier with the ncurses library:
 
 ![](screenshots/ncurses.png?raw=true)
 
-You can customize the map size and the different process cycle time in the `common/utils.h` file !
+You can customize the map size and the different process cycle times in the `common/utils.h` file !
 
 Made with ♥ by Guillaume Munsch
 
