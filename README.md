@@ -30,9 +30,8 @@ And launch it this way:
 $ ./swim_mill
 ```
 
-   [C]: <http://www.cprogramming.com>
-   [Ncurses]: <http://linux.die.net/man/3/ncurses>
-
+This will look like that:
+{% include image.html url="/screenshots/no_lib.png" description="Without lib" %}
 
 ### Graphic part
 
@@ -51,3 +50,6 @@ $ ./swim_mill graphic
 ```
 
 Made with ♥ by Guillaume Munsch
+
+   [C]: <http://www.cprogramming.com>
+   [Ncurses]: <http://linux.die.net/man/3/ncurses>
