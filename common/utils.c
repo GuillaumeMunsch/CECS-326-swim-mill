@@ -73,9 +73,9 @@ void print_map(char *river, int map_lock)
     else if (ISFISHBIT(river[i]) && !(ISPELLETBIT(river[i])))
       write(1, "F", 1);
     else if (ISPELLETBIT(river[i]) && !(ISFISHBIT(river[i])))
-      write(1, "p", 1);
+      write(1, "o", 1);
     else
-      write(1, "X", 1);
+      write(1, "F", 1);
     if (i % RIVER_WIDTH == RIVER_WIDTH - 1)
       write(1, "\n", 1);
   }
