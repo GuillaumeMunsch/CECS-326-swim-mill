@@ -1,7 +1,9 @@
 # CECS-326-swim-mill
 
 The purpose of this project is to create a river in which a fish is going to look for some pellets that are randomly dropped into the river.
+
 The `fish` itself and each `pellet` are processes on their own. They are coordinated by the `swim_mill` process, which is the main one.
+
 A graphical version is also available.
 
 ### Version
